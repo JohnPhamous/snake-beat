@@ -4,6 +4,7 @@
 
 - [ ] Start Game Screen
 - [ ] Game Over Screen
+- [ ] Restart game
 - [ ] Leaderboard using local storage
 - [ ] Flash head and intersected segment upon collision
 - [ ] Add sound effects when changing direction and eating

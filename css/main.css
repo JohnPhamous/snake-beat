@@ -5,6 +5,11 @@ body {
   width: 100%;
   overflow: hidden;
 }
+
+#game-container {
+  display: none;
+}
+
 #game {
   padding: 0;
   margin: auto;

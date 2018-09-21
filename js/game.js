@@ -3,6 +3,12 @@ const ctx = canvas.getContext("2d");
 const UNIT_SIZE = 32;
 const SOUNDTRACK = document.querySelector("#soundtrack");
 const SCORE_VIEW = document.querySelector("#score");
+const GAME_CONTAINER = document.querySelector("#game-container");
+const ABOUT = document.querySelector("#about");
+const blurKeyframes = [10, 20, 30, 40, 50];
+let keyframePointer = 0;
+let pointerDirection = 1;
+const sizeKeyframes = [0.5, 0.6, 0.7, 0.8, 0.9];
 
 // Used https://getsongbpm.com/tools/audio to get the BPM
 // of the song
@@ -82,11 +88,6 @@ function speedUp(factor) {
   game = setInterval(draw, BPM_TO_MS / factor);
 }
 
-const blurKeyframes = [10, 20, 30, 40, 50];
-let keyframePointer = 0;
-let pointerDirection = 1;
-const sizeKeyframes = [0.5, 0.6, 0.7, 0.8, 0.9];
-
 function drawFood() {
   let blurAmount;
   keyframePointer += pointerDirection;
@@ -102,6 +103,7 @@ function drawFood() {
   let sizeOffset = sizeKeyframes[keyframePointer];
   ctx.fillRect(food.x, food.y, UNIT_SIZE, UNIT_SIZE);
 }
+
 function draw() {
   if (SOUNDTRACK.currentTime === 0) {
     SOUNDTRACK.play();
@@ -162,4 +164,13 @@ function draw() {
   snake.unshift(newHead);
 }
 
-let game = setInterval(draw, BPM_TO_MS);
+let game;
+
+function startGame() {
+  game = setInterval(draw, BPM_TO_MS);
+  ABOUT.style = "display: none";
+  GAME_CONTAINER.style = "display: block";
+  keyframePointer = 0;
+  pointerDirection = 1;
+  directionMoving = "RIGHT";
+}
