@@ -82,6 +82,26 @@ function speedUp(factor) {
   game = setInterval(draw, BPM_TO_MS / factor);
 }
 
+const blurKeyframes = [10, 20, 30, 40, 50];
+let keyframePointer = 0;
+let pointerDirection = 1;
+const sizeKeyframes = [0.5, 0.6, 0.7, 0.8, 0.9];
+
+function drawFood() {
+  let blurAmount;
+  keyframePointer += pointerDirection;
+  if (keyframePointer >= blurKeyframes.length || keyframePointer < 0) {
+    pointerDirection *= -1;
+    keyframePointer += pointerDirection;
+  }
+  blurAmount = blurKeyframes[keyframePointer];
+  ctx.shadowBlur = blurAmount;
+  ctx.shadowColor = "#00b7ff";
+  ctx.fillStyle = "#00b7ff";
+
+  let sizeOffset = sizeKeyframes[keyframePointer];
+  ctx.fillRect(food.x, food.y, UNIT_SIZE, UNIT_SIZE);
+}
 function draw() {
   if (SOUNDTRACK.currentTime === 0) {
     SOUNDTRACK.play();
@@ -92,17 +112,28 @@ function draw() {
   if (SOUNDTRACK.currentTime > 43) {
     speedUp(4);
   }
-  ctx.fillStyle = "black";
+
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = "rgba(0, 0, 0, 1)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  drawFood();
 
+  let startingOpacity = 0.9;
   snake.forEach((segment, index) => {
-    ctx.fillStyle = index === 0 ? "green" : "white";
-    ctx.fillRect(segment.x, segment.y, UNIT_SIZE, UNIT_SIZE);
-  });
+    let segmentColor;
 
-  // draw the food
-  ctx.fillStyle = "#00b7ff";
-  ctx.fillRect(food.x, food.y, UNIT_SIZE, UNIT_SIZE);
+    if (index === 0) {
+      segmentColor = "white";
+      ctx.shadowBlur = 50;
+      ctx.shadowColor = "white";
+    } else {
+      segmentColor = `rgba(255, 255, 255, ${startingOpacity})`;
+      startingOpacity -= 0.05;
+      ctx.shadowBlur = 0;
+    }
+    ctx.fillStyle = segmentColor;
+    ctx.fillRect(segment.x, segment.y, UNIT_SIZE * 0.95, UNIT_SIZE * 0.95);
+  });
 
   // updating the snake position
   let x = snake[0].x;
