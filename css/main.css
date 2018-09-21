@@ -6,12 +6,12 @@ body {
   overflow: hidden;
 }
 
-#game-container {
-  display: none;
-}
-
-#game {
-  padding: 0;
+#start-screen {
+  max-width: 400px;
+  background: rgba(0, 0, 0, 0.8);
+  height: 400px;
+  text-align: center;
+  padding: 20px 20px;
   margin: auto;
   display: block;
   position: absolute;
@@ -21,7 +21,49 @@ body {
   right: 0;
 }
 
-h1 {
+#game-screen {
+  display: none;
+}
+
+#game {
+  padding: 0;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#scores {
+  width: 300px;
+  height: 100px;
+}
+
+#game-controls {
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+p {
   color: white;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h3,
+p {
+  text-align: left;
+}
+
+.btn {
+  padding: 10px 20px;
+  background: none;
+  color: white;
+  box-shadow: none;
+  border: 1px solid red;
+  font-size: 1.25em;
+  margin-top: 50px;
+  cursor: pointer;
 }
