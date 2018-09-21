@@ -10,8 +10,32 @@
 </head>
 
 <body>
-    <h1>Score: <span id="score">0</span></h1>
-    <canvas id="game" width="800" height="800"></canvas>
+    <section id="start-screen">
+        <h1>Snake</h1>
+        <h3>Controls</h3>
+        <p>
+            To control your snake, you can use the arrow keys or wasd.
+        </p>
+        <p>
+            To start the game, click the button below or click the spacebar or return key.
+        </p>
+        <button class="btn btn-start" onclick="startGame()">Start Game</button>
+    </section>
+
+    <section id="game-screen">
+        <h1>Score: <span id="score">0</span></h1>
+        <h1>High Score: <span id="high-score">0</span></h1>
+        <canvas id="game" width="800" height="800"></canvas>
+        <div id="game-controls">
+            <button>Restart</button>
+            <button>Home</button>
+        </div>
+
+        <div id="scores">
+
+        </div>
+    </section>
+
     <audio id="soundtrack" src="./assets/soundtrack.mp3"></audio>
     <script src="./js/game.js"></script>
 </body>

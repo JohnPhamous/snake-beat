@@ -2,13 +2,20 @@
 
 ## Feature Log
 
-- [ ] Start Game Screen
+- [ ] Add a delay from when the user starts the game to the game actually starting
+- [ ] Make the canvas the focus when the game starts
+- [x] Start Game Screen
+  - Prompt controls
+  - Press space or enter to start the game
+- [x] Add WASD controls
 - [ ] Game Over Screen
-- [ ] Leaderboard using local storage
+- [x] Track high score using local storage
 - [ ] Flash head and intersected segment upon collision
 - [ ] Add sound effects when changing direction and eating
 - [ ] Allow for song tempo change to be triggered by current score rather than time
 - [ ] Add a timer for last eaten, if you haven't eaten within x time from the last thing, you will lose a segment
+- [ ] Make responsive for mobile
+  - Add swipe controls
 
 ## Live Demo
 

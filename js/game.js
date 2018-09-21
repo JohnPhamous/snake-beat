@@ -3,6 +3,12 @@ const ctx = canvas.getContext("2d");
 const UNIT_SIZE = 32;
 const SOUNDTRACK = document.querySelector("#soundtrack");
 const SCORE_VIEW = document.querySelector("#score");
+const HIGH_SCORE_VIEW = document.querySelector("#high-score");
+const START_SCREEN = document.querySelector("#start-screen");
+const GAME_SCREEN = document.querySelector("#game-screen");
+let gameRunning = false;
+let highScore = getHighScore() || 0;
+HIGH_SCORE_VIEW.innerText = highScore;
 
 // Used https://getsongbpm.com/tools/audio to get the BPM
 // of the song
@@ -11,18 +17,35 @@ const SCORE_VIEW = document.querySelector("#score");
 // This is used so the snake moves in beat with the song
 const BPM_TO_MS = 143 / 2;
 
+document.addEventListener("keydown", startGame);
 document.addEventListener("keydown", getDirection);
 let directionMoving = "RIGHT";
 
+const keyMappings = {
+  ArrowUp: "UP",
+  ArrowDown: "DOWN",
+  ArrowLeft: "LEFT",
+  ArrowRight: "RIGHT",
+  w: "UP",
+  s: "DOWN",
+  a: "LEFT",
+  d: "RIGHT"
+};
+
+const complimentMappings = {
+  UP: "DOWN",
+  DOWN: "UP",
+  LEFT: "RIGHT",
+  RIGHT: "LEFT"
+};
+
 function getDirection(e) {
-  if (e.key === "ArrowUp" && directionMoving !== "DOWN") directionMoving = "UP";
-  else if (e.key === "ArrowDown" && directionMoving !== "UP")
-    directionMoving = "DOWN";
-  else if (e.key === "ArrowLeft" && directionMoving !== "RIGHT")
-    directionMoving = "LEFT";
-  else if (e.key === "ArrowRight" && directionMoving !== "LEFT")
-    directionMoving = "RIGHT";
-  else return;
+  const newDirection = keyMappings[e.key];
+  const oldDirection = directionMoving;
+
+  if (newDirection && newDirection !== complimentMappings[oldDirection]) {
+    directionMoving = newDirection;
+  }
 }
 let snake = [
   {
@@ -75,6 +98,10 @@ function endGame() {
   clearInterval(game);
   SOUNDTRACK.pause();
   SOUNDTRACK.currentTime = 0;
+  if (score > highScore) {
+    highScore = score;
+    setHighScore(highScore);
+  }
 }
 
 function speedUp(factor) {
@@ -162,4 +189,22 @@ function draw() {
   snake.unshift(newHead);
 }
 
-let game = setInterval(draw, BPM_TO_MS);
+let game;
+
+function startGame(e) {
+  if ((e.key === "Enter" || e.key === " ") && !gameRunning) {
+    game = setInterval(draw, BPM_TO_MS);
+    START_SCREEN.style = "display: none";
+    GAME_SCREEN.style = "display: block";
+    gameRunning = true;
+  }
+}
+
+function setHighScore(highScore) {
+  localStorage.setItem("highScore", JSON.stringify(highScore));
+  HIGH_SCORE_VIEW.innerText = highScore;
+}
+
+function getHighScore() {
+  return localStorage.getItem("highScore");
+}
