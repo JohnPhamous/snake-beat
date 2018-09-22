@@ -1,15 +1,17 @@
 html,
 body {
   background: #222;
+  background: radial-gradient(#333, #111);
   height: 100%;
   width: 100%;
   overflow: hidden;
+  margin: 0;
 }
 
-#start-screen {
+.card {
   max-width: 400px;
-  background: rgba(0, 0, 0, 0.8);
-  height: 400px;
+  background: rgba(0, 0, 0, 0.5);
+  height: 350px;
   text-align: center;
   padding: 20px 20px;
   margin: auto;
@@ -36,12 +38,21 @@ body {
 }
 
 #scores {
-  width: 300px;
-  height: 100px;
+  text-align: right;
+  padding-right: 20px;
+  z-index: 1;
+  position: relative;
 }
 
 #game-controls {
-  text-align: center;
+  text-align: right;
+}
+
+#game-over {
+  z-index: 1;
+  border: 1px solid white;
+  display: none;
+  height: 175px;
 }
 
 h1,
@@ -62,8 +73,8 @@ p {
   background: none;
   color: white;
   box-shadow: none;
-  border: 1px solid red;
+  border: 1px solid #00b7ff;
   font-size: 1.25em;
-  margin-top: 50px;
+  margin-top: 15px;
   cursor: pointer;
 }
