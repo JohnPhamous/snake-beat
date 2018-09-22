@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <section id="start-screen">
+    <section id="start-screen" class="card">
         <h1>Snake</h1>
         <h3>Controls</h3>
         <p>
@@ -24,20 +24,27 @@
     </section>
 
     <section id="game-screen">
-        <h1>Score: <span id="score">0</span></h1>
-        <h1>High Score: <span id="high-score">0</span></h1>
-        <canvas id="game" width="800" height="800"></canvas>
-        <div id="game-controls">
-            <button>Restart</button>
-            <button>Home</button>
+        <div id="game-over" class="card">
+            <h1>Game Over!</h1>
+            <p>
+                Press the spacebar or return key to restart the game.
+            </p>
+            <button onclick="goHome()" class="btn">Home</button>
         </div>
+        <canvas id="game" width="800" height="800"></canvas>
 
         <div id="scores">
-
+            <h1>Score: <span id="score">0</span></h1>
+            <h1>High Score: <span id="high-score">0</span></h1>
+            <div id="game-controls">
+                <button onclick="goHome()">Home</button>
+            </div>
         </div>
+
     </section>
 
     <audio id="soundtrack" src="./assets/soundtrack.mp3"></audio>
+    <audio id="eat-sound" src="./assets/eat.mp3"></audio>
     <script src="./js/environment.js"></script>
     <script src="./js/score.js"></script>
     <script src="./js/food.js"></script>

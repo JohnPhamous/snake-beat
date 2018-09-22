@@ -10,7 +10,11 @@ const keyMappings = {
   w: "UP",
   s: "DOWN",
   a: "LEFT",
-  d: "RIGHT"
+  d: "RIGHT",
+  h: "LEFT",
+  l: "RIGHT",
+  k: "UP",
+  j: "DOWN"
 };
 
 const complimentMappings = {

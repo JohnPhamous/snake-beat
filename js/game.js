@@ -2,9 +2,9 @@ const canvas = document.querySelector("#game");
 const ctx = canvas.getContext("2d");
 // size of a tile
 const UNIT_SIZE = 32;
-const SOUNDTRACK = document.querySelector("#soundtrack");
 const START_SCREEN = document.querySelector("#start-screen");
 const GAME_SCREEN = document.querySelector("#game-screen");
+const GAME_OVER_SCREEN = document.querySelector("#game-over");
 let gameRunning = false;
 let highScore;
 let game;
@@ -21,6 +21,9 @@ function endGame() {
     setHighScore(highScore);
   }
   gameRunning = false;
+  directionMoving = "RIGHT";
+  GAME_OVER_SCREEN.style = "display: block";
+  canvas.style = "opacity: 0.2";
 }
 
 function draw() {
@@ -36,6 +39,9 @@ function draw() {
     score += 1;
     SCORE_VIEW.innerText = score;
     food = spawnFood();
+    EAT_SOUND.volume = 0.2;
+    EAT_SOUND.currentTime = 0;
+    EAT_SOUND.play();
   } else {
     snake.pop();
   }
@@ -56,14 +62,21 @@ function draw() {
 }
 
 function startGame(e) {
-  if ((e.key === "Enter" || e.key === " ") && !gameRunning) {
+  if ((!e || e.key === "Enter" || e.key === " ") && !gameRunning) {
     snake = createNewSnake();
     game = setInterval(draw, BPM_TO_MS);
     START_SCREEN.style = "display: none";
     GAME_SCREEN.style = "display: block";
+    GAME_OVER_SCREEN.style = "display: none";
+    canvas.style = "opacity: 1";
     gameRunning = true;
     highScore = getHighScore() || 0;
     HIGH_SCORE_VIEW.innerText = highScore;
     food = spawnFood();
   }
+}
+
+function goHome() {
+  START_SCREEN.style = "display: block";
+  GAME_SCREEN.style = "display: none";
 }

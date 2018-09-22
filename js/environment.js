@@ -1,3 +1,5 @@
+const SOUNDTRACK = document.querySelector("#soundtrack");
+const EAT_SOUND = document.querySelector("#eat-sound");
 // Used https://getsongbpm.com/tools/audio to get the BPM
 // of the song
 // then used http://guitargearfinder.com/guides/convert-ms-milliseconds-bpm-beats-per-minute-vice-versa/
@@ -35,6 +37,6 @@ function updateSound() {
 
 function drawBackground() {
   ctx.shadowBlur = 0;
-  ctx.fillStyle = "rgba(0, 0, 0, 1)";
+  ctx.fillStyle = "rgb(0, 0, 0)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
