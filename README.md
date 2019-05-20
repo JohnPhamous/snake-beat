@@ -1,6 +1,6 @@
 # Retro Snake Game
 
-> [Live Demo](https://johnpham.net/snake)
+> [Live Demo](https://johnpham.net/snake-beat)
 
 ## About
 
@@ -38,7 +38,7 @@ This is a version of the classic snake game written in Javascript. This version 
 
 ## Live Demo
 
-Test out the game live [here](https://johnpham.net/snake)!
+Test out the game live [here](https://johnpham.net/snake-beat)!
 
 ## Credits
 
